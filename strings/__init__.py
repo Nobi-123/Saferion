@@ -1,34 +1,43 @@
 import os
-from typing import List
-
 import yaml
+from typing import Dict
 
-languages = {}
-languages_present = {}
+languages: Dict[str, dict] = {}
+languages_present: Dict[str, str] = {}
 
+# Load English first as the fallback
+try:
+    with open("./strings/langs/en.yml", encoding="utf8") as f:
+        languages["en"] = yaml.safe_load(f)
+        languages_present["en"] = languages["en"].get("name", "English")
+except FileNotFoundError:
+    print("Error: 'en.yml' language file not found in ./strings/langs/")
+    exit()
 
-def get_string(lang: str):
-    return languages[lang]
+# Load other language files
+for filename in os.listdir("./strings/langs/"):
+    if not filename.endswith(".yml") or filename == "en.yml":
+        continue
 
-
-for filename in os.listdir(r"./strings/langs/"):
-    if "en" not in languages:
-        languages["en"] = yaml.safe_load(
-            open(r"./strings/langs/en.yml", encoding="utf8")
-        )
-        languages_present["en"] = languages["en"]["name"]
-    if filename.endswith(".yml"):
-        language_name = filename[:-4]
-        if language_name == "en":
-            continue
-        languages[language_name] = yaml.safe_load(
-            open(r"./strings/langs/" + filename, encoding="utf8")
-        )
-        for item in languages["en"]:
-            if item not in languages[language_name]:
-                languages[language_name][item] = languages["en"][item]
+    lang_code = filename[:-4]  # Remove .yml extension
     try:
-        languages_present[language_name] = languages[language_name]["name"]
-    except:
-        print("There is some issue with the language file inside bot.")
-        exit()
+        with open(f"./strings/langs/{filename}", encoding="utf8") as f:
+            lang_data = yaml.safe_load(f)
+
+        # Fill missing keys from English
+        for key in languages["en"]:
+            if key not in lang_data:
+                lang_data[key] = languages["en"][key]
+
+        languages[lang_code] = lang_data
+        languages_present[lang_code] = lang_data.get("name", lang_code)
+    except Exception as e:
+        print(f"Error loading language file '{filename}': {e}")
+        continue
+
+def get_string(lang_code: str):
+    """
+    Returns the language dictionary for the given lang_code.
+    Falls back to English if lang_code not found.
+    """
+    return languages.get(lang_code, languages["en"])
