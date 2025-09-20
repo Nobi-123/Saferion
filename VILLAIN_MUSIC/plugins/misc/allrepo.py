@@ -48,10 +48,3 @@ def get_all_repository_info(github_username):
     ])
 
     return repo_info
-
-[
-                                InlineKeyboardButton(
-                                    "𝖩ᴏɪɴ 𝖳ᴇᴀᴍ 𝖯ᴜʀᴠɪ 𝖡ᴏᴛs",
-                                    url="t.me/purvi_support"
-                                )
-]
