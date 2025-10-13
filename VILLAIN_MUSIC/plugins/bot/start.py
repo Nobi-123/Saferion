@@ -30,9 +30,8 @@ from strings import get_string
 
 NEXI_VID = [
 "https://files.catbox.moe/t4s9sa.mp4",
-
+"https://files.catbox.moe/fk193s.mp4"
 ]
-
 
 
 @app.on_message(filters.command(["start"]) & filters.private & ~BANNED_USERS)
