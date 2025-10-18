@@ -20,7 +20,7 @@ BOT_USERNAME = getenv("BOT_USERNAME","DiorMusicBot")
 # --------------------------------------------------------
 BOT_NAME = getenv("BOT_NAME","Dior †")
 # ---------------------------------------------------------
-
+ASSUSERNAME = getenv("ASSUSERNAME", "UnknownAura")
 
 # Get your mongo url from cloud.mongodb.com
 MONGO_DB_URI = getenv("MONGO_DB_URI","mongodb+srv://ahad2902772:ahad2902772@cluster0.y9kbv6g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
