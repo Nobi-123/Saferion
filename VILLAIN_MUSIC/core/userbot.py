@@ -4,7 +4,7 @@ import config
 
 LOGGER_ID = -1003133341793
 
-ASSUSERNAME = @UnknownAura
+ASSUSERNAME = "UnknownAura"
 from ..logging import LOGGER
 
 assistants = []
