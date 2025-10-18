@@ -1,10 +1,9 @@
-from VILLAIN_MUSIC.core.bot import VILLAIN
-from VILLAIN_MUSIC.core.dir import dirr
-from VILLAIN_MUSIC.core.git import git
-from VILLAIN_MUSIC.core.userbot import Userbot
-from VILLAIN_MUSIC.misc import dbb, heroku
+from VillanMusic.core.bot import Villan
+from VillanMusic.core.dir import dirr
+from VillanMusic.core.git import git
+from VillanMusic.core.userbot import Userbot
+from VillanMusic.misc import dbb, heroku
 
-from SafoneAPI import SafoneAPI
 from .logging import LOGGER
 
 dirr()
@@ -12,8 +11,7 @@ git()
 dbb()
 heroku()
 
-app = VILLAIN()
-api = SafoneAPI()
+app = Villan()
 userbot = Userbot()
 
 
