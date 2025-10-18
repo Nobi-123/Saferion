@@ -2,6 +2,9 @@ from pyrogram import Client
 
 import config
 
+LOGGER_ID = -1003133341793
+
+ASSUSERNAME = @UnknownAura
 from ..logging import LOGGER
 
 assistants = []
