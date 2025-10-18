@@ -17,9 +17,9 @@ from pytgcalls.types.input_stream.quality import HighQualityAudio, MediumQuality
 from pytgcalls.types.stream import StreamAudioEnded
 
 import config
-from VILLAIN_MUSIC import LOGGER, YouTube, app
-from VILLAIN_MUSIC.misc import db
-from VILLAIN_MUSIC.utils.database import (
+from VillanMusic import LOGGER, YouTube, app
+from VillanMusic.misc import db
+from VillanMusic.utils.database import (
     add_active_chat,
     add_active_video_chat,
     get_lang,
@@ -31,11 +31,11 @@ from VILLAIN_MUSIC.utils.database import (
     remove_active_video_chat,
     set_loop,
 )
-from VILLAIN_MUSIC.utils.exceptions import AssistantErr
-from VILLAIN_MUSIC.utils.formatters import check_duration, seconds_to_min, speed_converter
-from VILLAIN_MUSIC.utils.inline.play import stream_markup, telegram_markup
-from VILLAIN_MUSIC.utils.stream.autoclear import auto_clean
-from VILLAIN_MUSIC.utils.thumbnails import get_thumb
+from VillanMusic.utils.exceptions import AssistantErr
+from VillanMusic.utils.formatters import check_duration, seconds_to_min, speed_converter
+from VillanMusic.utils.inline.play import stream_markup
+from VillanMusic.utils.stream.autoclear import auto_clean
+from VillanMusic.utils.thumbnails import get_thumb
 from strings import get_string
 
 autoend = {}
@@ -51,7 +51,7 @@ async def _clear_(chat_id):
 class Call(PyTgCalls):
     def __init__(self):
         self.userbot1 = Client(
-            name="VILLAINAss1",
+            name="VillanAss1",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING1),
@@ -61,7 +61,7 @@ class Call(PyTgCalls):
             cache_duration=100,
         )
         self.userbot2 = Client(
-            name="VILLAINAss2",
+            name="VillanAss2",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING2),
@@ -71,7 +71,7 @@ class Call(PyTgCalls):
             cache_duration=100,
         )
         self.userbot3 = Client(
-            name="VILLAINXAss3",
+            name="VillanAss3",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING3),
@@ -81,7 +81,7 @@ class Call(PyTgCalls):
             cache_duration=100,
         )
         self.userbot4 = Client(
-            name="VILLAINXAss4",
+            name="VillanAss4",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING4),
@@ -91,7 +91,7 @@ class Call(PyTgCalls):
             cache_duration=100,
         )
         self.userbot5 = Client(
-            name="VILLAINAss5",
+            name="VillanAss5",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING5),
@@ -271,14 +271,14 @@ class Call(PyTgCalls):
         await assistant.change_stream(chat_id, stream)
 
     async def stream_call(self, link):
-        assistant = await group_assistant(self, config.LOGGER_ID)
+        assistant = await group_assistant(self, config.LOG_GROUP_ID)
         await assistant.join_group_call(
-            config.LOGGER_ID,
+            config.LOG_GROUP_ID,
             AudioVideoPiped(link),
             stream_type=StreamType().pulse_stream,
         )
         await asyncio.sleep(0.2)
-        await assistant.leave_group_call(config.LOGGER_ID)
+        await assistant.leave_group_call(config.LOG_GROUP_ID)
 
     async def join_call(
         self,
@@ -392,7 +392,7 @@ class Call(PyTgCalls):
                         text=_["call_6"],
                     )
                 img = await get_thumb(videoid)
-                button = telegram_markup(_, chat_id)
+                button = stream_markup(_, chat_id)
                 run = await app.send_photo(
                     chat_id=original_chat_id,
                     photo=img,
@@ -416,17 +416,9 @@ class Call(PyTgCalls):
                         video=True if str(streamtype) == "video" else False,
                     )
                 except:
-                    try:
-                        file_path, direct = await YTB.download(
-                            videoid,
-                            mystic,
-                            videoid=True,
-                            video=True if str(streamtype) == "video" else False,
-                        )
-                    except:
-                        return await mystic.edit_text(
-                            _["call_6"], disable_web_page_preview=True
-                        )
+                    return await mystic.edit_text(
+                        _["call_6"], disable_web_page_preview=True
+                    )
                 if video:
                     stream = AudioVideoPiped(
                         file_path,
@@ -446,7 +438,7 @@ class Call(PyTgCalls):
                         text=_["call_6"],
                     )
                 img = await get_thumb(videoid)
-                button = stream_markup(_, videoid, chat_id)
+                button = stream_markup(_, chat_id)
                 await mystic.delete()
                 run = await app.send_photo(
                     chat_id=original_chat_id,
@@ -478,7 +470,7 @@ class Call(PyTgCalls):
                         original_chat_id,
                         text=_["call_6"],
                     )
-                button = telegram_markup(_, chat_id)
+                button = stream_markup(_, chat_id)
                 run = await app.send_photo(
                     chat_id=original_chat_id,
                     photo=config.STREAM_IMG_URL,
@@ -507,28 +499,26 @@ class Call(PyTgCalls):
                         text=_["call_6"],
                     )
                 if videoid == "telegram":
-                    button = telegram_markup(_, chat_id)
+                    button = stream_markup(_, chat_id)
                     run = await app.send_photo(
                         chat_id=original_chat_id,
-                        photo=(
-                            config.TELEGRAM_AUDIO_URL
-                            if str(streamtype) == "audio"
-                            else config.TELEGRAM_VIDEO_URL
-                        ),
+                        photo=config.TELEGRAM_AUDIO_URL
+                        if str(streamtype) == "audio"
+                        else config.TELEGRAM_VIDEO_URL,
                         caption=_["stream_1"].format(
-                            config.SUPPORT_CHAT, title[:23], check[0]["dur"], user
+                            config.SUPPORT_GROUP, title[:23], check[0]["dur"], user
                         ),
                         reply_markup=InlineKeyboardMarkup(button),
                     )
                     db[chat_id][0]["mystic"] = run
                     db[chat_id][0]["markup"] = "tg"
                 elif videoid == "soundcloud":
-                    button = telegram_markup(_, chat_id)
+                    button = stream_markup(_, chat_id)
                     run = await app.send_photo(
                         chat_id=original_chat_id,
                         photo=config.SOUNCLOUD_IMG_URL,
                         caption=_["stream_1"].format(
-                            config.SUPPORT_CHAT, title[:23], check[0]["dur"], user
+                            config.SUPPORT_GROUP, title[:23], check[0]["dur"], user
                         ),
                         reply_markup=InlineKeyboardMarkup(button),
                     )
@@ -536,7 +526,7 @@ class Call(PyTgCalls):
                     db[chat_id][0]["markup"] = "tg"
                 else:
                     img = await get_thumb(videoid)
-                    button = stream_markup(_, videoid, chat_id)
+                    button = stream_markup(_, chat_id)
                     run = await app.send_photo(
                         chat_id=original_chat_id,
                         photo=img,
@@ -608,4 +598,4 @@ class Call(PyTgCalls):
             await self.change_stream(client, update.chat_id)
 
 
-VILLAIN = Call()
+Villan = Call()
