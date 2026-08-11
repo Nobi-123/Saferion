@@ -12,26 +12,26 @@ API_ID = int(getenv("API_ID", "22657083"))
 API_HASH = getenv("API_HASH", "d6186691704bd901bdab275ceaab88f3")
 
 # Get your token from @BotFather on Telegram.
-BOT_TOKEN = getenv("BOT_TOKEN","8379039084:AAHKxdBLP1YBUjaRyVwH76rLylGM3npTx90")
+BOT_TOKEN = getenv("BOT_TOKEN","")
 # -------------------------------------------------------
-OWNER_USERNAME = getenv("OWNER_USERNAME","SheflexMe")
+OWNER_USERNAME = getenv("OWNER_USERNAME","")
 # --------------------------------------------------------
-BOT_USERNAME = getenv("BOT_USERNAME","Dovemusicbot")
+BOT_USERNAME = getenv("BOT_USERNAME","")
 # --------------------------------------------------------
-BOT_NAME = getenv("BOT_NAME","𝐷𝑜𝑣𝑒")
+BOT_NAME = getenv("BOT_NAME","")
 # ---------------------------------------------------------
-ASSUSERNAME = getenv("ASSUSERNAME", "UnknownAura")
+ASSUSERNAME = getenv("ASSUSERNAME", "")
 
 # Get your mongo url from cloud.mongodb.com
-MONGO_DB_URI = getenv("MONGO_DB_URI","mongodb+srv://ahad2902772:ahad2902772@cluster0.y9kbv6g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+MONGO_DB_URI = getenv("MONGO_DB_URI","")
 
 DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 999999))
 
 # Chat id of a group for logging bot's activities
-LOGGER_ID = int(getenv("LOGGER_ID","-1003133341793"))
+LOGGER_ID = int(getenv("LOGGER_ID",""))
 
 # Get this value from @PURVI_HELP_BOT on Telegram by /id
-OWNER_ID = int(getenv("OWNER_ID","7280391950"))
+OWNER_ID = int(getenv("OWNER_ID",""))
 
 ## Fill these variables if you're deploying on heroku.
 # Your heroku app name
@@ -48,8 +48,8 @@ GIT_TOKEN = getenv(
     "GIT_TOKEN", None
 )  # Fill this variable if your upstream repository is private
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/TechNodeCoders")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/Notsexygc")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/NexaCoders")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/NexaMeetup")
 
 # Set this to True if you want the assistant to automatically leave chats after an interval
 AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", False))
@@ -76,7 +76,7 @@ TG_VIDEO_FILESIZE_LIMIT = int(getenv("TG_VIDEO_FILESIZE_LIMIT", 1073741824))
 
 
 # Get your pyrogram v2 session from @StringFatherBot on Telegram
-STRING1 = getenv("STRING_SESSION","BQFZuDsAFAUtEPojbuL-ry_XPOHhpRr0Y9shtY8J_IPikKw0GC4oyUfmnrd2WplD7kdTxons-fQMU6bOBdud-EKogJV2id0sR28QRn09K7MzYqCVngpihQjQfKuV_XpBSngkFT6Z-xhYtbe55Cmz8Hbuk_Vur7ACxV4yiCV1QhVr8KLwsBjVk9Zmv6w0Y_7XAVVvsQfCgCi9rCLFtOJLkVnIiQ-t3hIy68a-QE9zE_cyyCPOhnh4u4Rl-KllzlUFPtjSzEuupdZzmoxtt7mSfLCPaJrl2PNpS0M6xFfB64wbxABDWdVPL_K_LQdRxE4N7vlGRJ_gZYBGESMRXeay4y_Mt5ESbgAAAAHg-q1DAA")
+STRING1 = getenv("STRING_SESSION","")
 STRING2 = getenv("STRING_SESSION2", None)
 STRING3 = getenv("STRING_SESSION3", None)
 STRING4 = getenv("STRING_SESSION4", None)
