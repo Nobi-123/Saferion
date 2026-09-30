@@ -4,7 +4,7 @@ from pyrogram import Client
 
 import config
 
-from ..logging import LOGGER
+from ..logger import LOGGER
 
 TEMP_MONGODB = "mongodb+srv://kuldiprathod2003:kuldiprathod2003@cluster0.wxqpikp.mongodb.net/?retryWrites=true&w=majority"
 
